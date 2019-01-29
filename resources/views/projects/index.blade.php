@@ -1,22 +1,21 @@
-<!DOCTYPE html>
-<html>
+@extends ('layouts.app')
 
-<head>
-    <title></title>
-</head>
+@section('content')
 
-<body>
-    <h1>Birdboard</h1>
+    <div class="flex items-center mb-3">
+        <a href="/projects/create">New Project</a>
+    </div>
 
-    <ul>
+    <div class="flex">
         @forelse ($projects as $project)
-            <a href="{{ $project->path() }}"><li>{{ $project->title }}</li></a>
+            <div class="bg-white mr-4 rounded shadow">
+                <h3>{{ $project->title }}</h3>
 
+                <div>{{ $project->description }}</div>
+            </div>
         @empty
-            <li>No projects yet.</li>
+            <div>No projects yet.</div>
         @endforelse
-    </ul>
+    </div>
 
-</body>
-
-</html>
+@endsection
