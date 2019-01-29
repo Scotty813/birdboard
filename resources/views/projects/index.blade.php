@@ -2,20 +2,19 @@
 
 @section('content')
 
-    <div class="flex items-center mb-3">
-        <a href="/projects/create">New Project</a>
-    </div>
+    <header class="flex items-end mb-3 py-4 justify-between">
+        <h2 class="text-grey text-sm font-normal">My Projects</h2>
+        <a href="/projects/create" class="no-underline button py-2 px-5">New Project</a>
+    </header>
 
-    <div class="flex">
+    <main class="flex flex-wrap -mx-3">
         @forelse ($projects as $project)
-            <div class="bg-white mr-4 rounded shadow">
-                <h3>{{ $project->title }}</h3>
-
-                <div>{{ $project->description }}</div>
+            <div class="w-1/3 px-3 pb-6 ">
+                @include ('projects.card')
             </div>
         @empty
             <div>No projects yet.</div>
         @endforelse
-    </div>
+    </main>
 
 @endsection

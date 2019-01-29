@@ -42,6 +42,15 @@
  * @import "components/forms";
  */
 
+.button {
+  @apply .bg-blue .text-white .no-underline .rounded-lg .text-sm;
+  box-shadow: 0 2px 7px 0 #b0eaff;
+}
+
+.card {
+  @apply .bg-white .rounded-lg .shadow .p-5
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
