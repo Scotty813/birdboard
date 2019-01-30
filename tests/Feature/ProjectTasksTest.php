@@ -11,19 +11,19 @@ class ProjectTasksTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** test */
+    /** @test */
     public function a_project_can_have_tasks()
     {
         $this->signIn();
 
-        $project = factory(Project::class)->create(['owner_id' => auth()->id()]);
+        $project = factory(Project::class)->raw();
+
+        $project = auth()->user()->projects()->create($project);
 
         $this->post($project->path() . '/tasks', ['body' => 'Test task']);
 
         $this->get($project->path())
             ->assertSee('Test task');
-
-
 
     }
 }
