@@ -11,14 +11,32 @@
 
     <main>
         <div class="flex">
-            <div class="w-3/4 pr-3">
+            <div class="w-3/4 pr-6">
                 <div class="mb-8">
                     <h2 class="mb-3 text-grey text-lg font-normal ">Tasks</h2>
                     {{-- Tasks --}}
 
                     @foreach ($project->tasks as $task)
-                        <div class="card mb-3">{{ $task->body }}</div>
+                        <div class="card mb-3">
+                            <form method="POST" action="{{ $project->path() . '/tasks/' . $task->id }}">
+                                @method('PATCH')
+                                @csrf
+
+                                <div class="flex ">
+                                    <input name="body" value="{{ $task->body }}" class="w-full">
+                                    <input type="checkbox" name="completed" onChange="this.form.submit()">
+                                </div>
+                            </form>
+                        </div>
                     @endforeach
+
+                    <div class="card mb-3 p-0">
+                        <form action="{{ $project->path() . '/tasks' }}" method="POST">
+                            @csrf
+
+                            <input class="rounded-lg w-full p-5" placeholder="Begin adding tasks" name="body"/>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="mb-8">
@@ -29,7 +47,7 @@
                 </div>
 
             </div>
-            <div class="w-1/4">
+            <div class="w-1/4" style="margin-top: 32px">
                 @include ('projects.card')
             </div>
         </div>
